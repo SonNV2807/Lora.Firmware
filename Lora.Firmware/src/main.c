@@ -92,8 +92,6 @@ void ProcessTask_100ms(void)
 *******************************************************************************/
 void ProcessTask_1000ms(void)
 {	
-//	DebugPrint("\rXin chao cac ban");
-//	DebugPrint("\rHere.");
 	PWR_Process();
 }
 

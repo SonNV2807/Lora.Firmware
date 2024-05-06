@@ -30,16 +30,15 @@ void PWR_Process(void)
 	
 	Watchdog_Reset();
 	
-	PWR_LowPowerRunMode(ENABLE);
+//	PWR_LowPowerRunMode(ENABLE);
 	
-//	PWR_SleepMode(PWR_Regulator_ON, PWR_SLEEPEntry_WFI);
+	PWR_SleepMode(PWR_Regulator_ON, PWR_SLEEPEntry_WFI);
 	
 //	PWR_LowPowerSleepMode();
 	
-//	PWR_STOPMode(PWR_Regulator_LowPower, PWR_SLEEPEntry_WFI);
+//	PWR_STOPMode(PWR_SLEEPEntry_WFI);
 	
-//	DebugPrint("\rEnter Standby mode.");
-//	PWR_EnterSTANDBYMode();
+//	PWR_STANDBYMode();
 }
 
 /*******************************************************************************
@@ -120,67 +119,32 @@ void PWR_LowPowerSleepMode(void)
  * Description			: Che do stop cua MCU
 *******************************************************************************/
 void PWR_StopMode(uint8_t EntryMode)
-{	
-//	 /* Enable Clocks */
-//    RCC->APB1ENR |= RCC_APB1ENR_PWREN;
-//    RCC->IOPENR |= RCC_IOPENR_GPIOAEN;
-//     
-//    /* Configure PA0 as External Interrupt */
-//    GPIOA->MODER &= ~( GPIO_MODER_MODE0 ); // PA0 is in Input mode
-//    EXTI->IMR |= EXTI_IMR_IM0; // interrupt request from line 0 not masked
-//    EXTI->RTSR |= EXTI_RTSR_TR0; // rising trigger enabled for input line 0
-//     
-//    // Enable interrupt in the NVIC
-//    NVIC_EnableIRQ( EXTI0_1_IRQn );
-//    NVIC_SetPriority( EXTI0_1_IRQn, BTN_INT_PRIO );
-//     
-//    /* Prepare to enter stop mode */
-//    PWR->CR |= PWR_CR_CWUF; // clear the WUF flag after 2 clock cycles
-//    PWR->CR &= ~( PWR_CR_PDDS ); // Enter stop mode when the CPU enters deepsleep
-//    RCC->CFGR |= RCC_CFGR_STOPWUCK; // HSI16 oscillator is wake-up from stop clock
-//    SCB->SCR |= SCB_SCR_SLEEPDEEP_Msk; // low-power mode = stop mode
-//    __WFI(); // enter low-power mode
-	
-//	PWR->CR |= PWR_CR_CWUF;									// clear wake up flag
-//	
-//	PWR->CR &= ~(PWR_CR_PDDS);							// clear PDDS bit
-//	
-//	PWR->CR &= ~(PWR_CR_LPSDSR);						// set LPSDSR bit
-//	
-//	SCB->SCR |= SCB_SCR_SLEEPDEEP_Msk;  		// set SLEEPDEEP bit
-//	
+{	  
+//  /* Check the parameters */
+//  assert_param(IS_PWR_REGULATOR(PWR_Regulator));
+//  assert_param(IS_PWR_STOP_ENTRY(PWR_STOPEntry));
+//  
+//  /* Clear PDDS and LPDSR bits */
+//  PWR->CR &= ~(PWR_CR_PDDS);
+//  
+//  /* Set LPDSR bit according to PWR_Regulator value */
+//  PWR->CR &= ~(PWR_CR_LPSDSR);
+//  
+//  /* Set SLEEPDEEP bit of Cortex System Control Register */
+//  SCB->SCR |= SCB_SCR_SLEEPDEEP;
+//  
+//  /* Select STOP mode entry --------------------------------------------------*/
 //	if(EntryMode == WAIT_FOR_INTERRUPT)
 //		__WFI();
 //	else
 //		__WFE();
 //	
-//	FLASH->OBR |= FLASH_OBR_IWDG_SW;
-//	
-//	SCB->SCR &= ~(SCB_SCR_SLEEPDEEP_Msk);  	// reset SLEEPDEEP bit
-  
-  /* Check the parameters */
-  assert_param(IS_PWR_REGULATOR(PWR_Regulator));
-  assert_param(IS_PWR_STOP_ENTRY(PWR_STOPEntry));
-  
-  /* Clear PDDS and LPDSR bits */
-  PWR->CR &= ~(PWR_CR_PDDS);
-  
-  /* Set LPDSR bit according to PWR_Regulator value */
-  PWR->CR &= ~(PWR_CR_LPSDSR);
-  
-  /* Set SLEEPDEEP bit of Cortex System Control Register */
-  SCB->SCR |= SCB_SCR_SLEEPDEEP;
-  
-  /* Select STOP mode entry --------------------------------------------------*/
-	if(EntryMode == WAIT_FOR_INTERRUPT)
-		__WFI();
-	else
-		__WFE();
+//  /* Reset SLEEPDEEP bit of Cortex System Control Register */
+//  SCB->SCR &= (uint32_t)~((uint32_t)SCB_SCR_SLEEPDEEP);  
+
+	DebugPrint("\rEnter Stop mode.");
 	
-  /* Reset SLEEPDEEP bit of Cortex System Control Register */
-  SCB->SCR &= (uint32_t)~((uint32_t)SCB_SCR_SLEEPDEEP);  
-	
-	
+	PWR_EnterSTOPMode(PWR_Regulator_LowPower, EntryMode);
 }
 
 /*******************************************************************************
@@ -191,6 +155,8 @@ void PWR_StopMode(uint8_t EntryMode)
 *******************************************************************************/
 void PWR_StandbyMode(void)
 {
+	DebugPrint("\rEnter Standby mode.");
+	
 	PWR_EnterSTANDBYMode();
 }
 

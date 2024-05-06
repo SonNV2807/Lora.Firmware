@@ -30,7 +30,7 @@ I (.\Libraries\inc\stm32l1xx_tim.h)(0x4FB06FD2)
 I (.\Libraries\inc\stm32l1xx_usart.h)(0x4FB06FD2)
 I (.\Libraries\inc\stm32l1xx_wwdg.h)(0x4FB06FD2)
 I (.\Libraries\inc\misc.h)(0x4FB06FD2)
-F (.\src\main.c)(0x6634B59B)(--c99 -c --cpu Cortex-M3 -g -O0 --apcs=interwork -I .\Libraries\inc -I .\Libraries\CMSIS\Include -I .\Libraries\CMSIS\Device\ST\STM32L1xx\Include -I .\inc -I .\inc\GPS-I.\RTE\_Lora-I"D:\Application\Keil C\ARM\CMSIS\5.9.0\CMSIS\Core\Include"-I"D:\Application\Keil C\Keil\STM32L1xx_DFP\1.4.1\Drivers\CMSIS\Device\ST\STM32L1xx\Include"-D__UVISION_VERSION="525" -D_RTE_ -DSTM32L151xB -DUSE_STDPERIPH_DRIVER -DHSE_VALUE="8000000"-o .\objects\main.o --omf_browse .\objects\main.crf --depend .\objects\main.d)
+F (.\src\main.c)(0x66384152)(--c99 -c --cpu Cortex-M3 -g -O0 --apcs=interwork -I .\Libraries\inc -I .\Libraries\CMSIS\Include -I .\Libraries\CMSIS\Device\ST\STM32L1xx\Include -I .\inc -I .\inc\GPS-I.\RTE\_Lora-I"D:\Application\Keil C\ARM\CMSIS\5.9.0\CMSIS\Core\Include"-I"D:\Application\Keil C\Keil\STM32L1xx_DFP\1.4.1\Drivers\CMSIS\Device\ST\STM32L1xx\Include"-D__UVISION_VERSION="525" -D_RTE_ -DSTM32L151xB -DUSE_STDPERIPH_DRIVER -DHSE_VALUE="8000000"-o .\objects\main.o --omf_browse .\objects\main.crf --depend .\objects\main.d)
 I (.\inc\Led.h)(0x6628CCA8)
 I (.\inc\main.h)(0x6628C7F2)
 I (.\Libraries\CMSIS\Device\ST\STM32L1xx\Include\stm32l1xx.h)(0x4FB06FE2)
@@ -303,7 +303,7 @@ I (.\Libraries\inc\stm32l1xx_usart.h)(0x4FB06FD2)
 I (.\Libraries\inc\stm32l1xx_wwdg.h)(0x4FB06FD2)
 I (.\Libraries\inc\misc.h)(0x4FB06FD2)
 I (.\inc\HardwareManager.h)(0x6632EBCA)
-F (.\src\PowerCtrl\PowerCtrl.c)(0x66382E75)(--c99 -c --cpu Cortex-M3 -g -O0 --apcs=interwork -I .\Libraries\inc -I .\Libraries\CMSIS\Include -I .\Libraries\CMSIS\Device\ST\STM32L1xx\Include -I .\inc -I .\inc\GPS-I.\RTE\_Lora-I"D:\Application\Keil C\ARM\CMSIS\5.9.0\CMSIS\Core\Include"-I"D:\Application\Keil C\Keil\STM32L1xx_DFP\1.4.1\Drivers\CMSIS\Device\ST\STM32L1xx\Include"-D__UVISION_VERSION="525" -D_RTE_ -DSTM32L151xB -DUSE_STDPERIPH_DRIVER -DHSE_VALUE="8000000"-o .\objects\powerctrl.o --omf_browse .\objects\powerctrl.crf --depend .\objects\powerctrl.d)
+F (.\src\PowerCtrl\PowerCtrl.c)(0x663842A1)(--c99 -c --cpu Cortex-M3 -g -O0 --apcs=interwork -I .\Libraries\inc -I .\Libraries\CMSIS\Include -I .\Libraries\CMSIS\Device\ST\STM32L1xx\Include -I .\inc -I .\inc\GPS-I.\RTE\_Lora-I"D:\Application\Keil C\ARM\CMSIS\5.9.0\CMSIS\Core\Include"-I"D:\Application\Keil C\Keil\STM32L1xx_DFP\1.4.1\Drivers\CMSIS\Device\ST\STM32L1xx\Include"-D__UVISION_VERSION="525" -D_RTE_ -DSTM32L151xB -DUSE_STDPERIPH_DRIVER -DHSE_VALUE="8000000"-o .\objects\powerctrl.o --omf_browse .\objects\powerctrl.crf --depend .\objects\powerctrl.d)
 I (.\inc\Debug.h)(0x6628C7C4)
 I (.\inc\main.h)(0x6628C7F2)
 I (.\Libraries\CMSIS\Device\ST\STM32L1xx\Include\stm32l1xx.h)(0x4FB06FE2)
