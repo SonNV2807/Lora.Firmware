@@ -1,0 +1,28 @@
+--cpu Cortex-M3
+".\objects\led.o"
+".\objects\main.o"
+".\objects\debug.o"
+".\objects\utilities.o"
+".\objects\interrupt.o"
+".\objects\initsystem.o"
+".\objects\watchdog.o"
+".\objects\configuration.o"
+".\objects\hardwaremanager.o"
+".\objects\powerctrl.o"
+".\objects\gps_process.o"
+".\objects\gps_hardware.o"
+".\objects\misc.o"
+".\objects\stm32l1xx_gpio.o"
+".\objects\stm32l1xx_usart.o"
+".\objects\stm32l1xx_rcc.o"
+".\objects\system_stm32l1xx.o"
+".\objects\startup_stm32l1xx_md.o"
+".\objects\stm32l1xx_iwdg.o"
+".\objects\stm32l1xx_pwr.o"
+".\objects\stm32l1xx_exti.o"
+".\objects\stm32l1xx_syscfg.o"
+".\objects\stm32l1xx_flash.o"
+--strict --scatter ".\Objects\Lora.sct"
+--summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
+--info sizes --info totals --info unused --info veneers
+--list ".\Listings\Lora.map" -o .\Objects\Lora.Firmware
