@@ -1,5 +1,5 @@
 .\objects\powerctrl.o: src\PowerCtrl\PowerCtrl.c
-.\objects\powerctrl.o: .\inc\Debug.h
+.\objects\powerctrl.o: .\inc\RTC.h
 .\objects\powerctrl.o: .\inc\main.h
 .\objects\powerctrl.o: .\Libraries\CMSIS\Device\ST\STM32L1xx\Include\stm32l1xx.h
 .\objects\powerctrl.o: .\Libraries\CMSIS\Include\core_cm3.h
@@ -30,6 +30,9 @@
 .\objects\powerctrl.o: .\Libraries\inc\stm32l1xx_usart.h
 .\objects\powerctrl.o: .\Libraries\inc\stm32l1xx_wwdg.h
 .\objects\powerctrl.o: .\Libraries\inc\misc.h
+.\objects\powerctrl.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\time.h
+.\objects\powerctrl.o: .\inc\Debug.h
 .\objects\powerctrl.o: .\inc\Watchdog.h
 .\objects\powerctrl.o: .\inc\PowerCtrl.h
+.\objects\powerctrl.o: .\inc\Utilities.h
 .\objects\powerctrl.o: .\inc\InitSystem.h

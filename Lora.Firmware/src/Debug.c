@@ -59,16 +59,6 @@ void Debug_Initialize(uint32_t Baudrate)
 	USART_InitStructure.USART_HardwareFlowControl 	= USART_HardwareFlowControl_None;	
 	USART_Init(Debug_UART, &USART_InitStructure);	
 	
-//	/* Connect EXTI  to PA10 pin */
-//  SYSCFG_EXTILineConfig(EXTI_PortSourceGPIOA, EXTI_PinSource10);
-//	
-//	/* Cau hinh EXTI */
-//	EXTI_InitStructure.EXTI_Line 		= EXTI_Line10;
-//	EXTI_InitStructure.EXTI_Mode 		= EXTI_Mode_Interrupt;
-//  EXTI_InitStructure.EXTI_Trigger = EXTI_Trigger_Rising;
-//  EXTI_InitStructure.EXTI_LineCmd = ENABLE;
-//  EXTI_Init(&EXTI_InitStructure);
-	
 	/* Cau hinh Interrupt */
 	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_0);						
 	NVIC_InitStructure.NVIC_IRQChannel 										= USART1_IRQn;				

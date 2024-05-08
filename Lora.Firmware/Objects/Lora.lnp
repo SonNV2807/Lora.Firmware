@@ -1,4 +1,5 @@
 --cpu Cortex-M3
+".\objects\rtc.o"
 ".\objects\led.o"
 ".\objects\main.o"
 ".\objects\debug.o"
@@ -15,13 +16,15 @@
 ".\objects\stm32l1xx_gpio.o"
 ".\objects\stm32l1xx_usart.o"
 ".\objects\stm32l1xx_rcc.o"
-".\objects\system_stm32l1xx.o"
-".\objects\startup_stm32l1xx_md.o"
 ".\objects\stm32l1xx_iwdg.o"
 ".\objects\stm32l1xx_pwr.o"
 ".\objects\stm32l1xx_exti.o"
 ".\objects\stm32l1xx_syscfg.o"
+".\objects\stm32l1xx_rtc.o"
 ".\objects\stm32l1xx_flash.o"
+".\objects\stm32l1xx_dbgmcu.o"
+".\objects\system_stm32l1xx.o"
+".\objects\startup_stm32l1xx_md.o"
 --strict --scatter ".\Objects\Lora.sct"
 --summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
 --info sizes --info totals --info unused --info veneers

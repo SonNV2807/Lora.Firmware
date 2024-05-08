@@ -22,16 +22,25 @@ Dialog DLL:      TCM.DLL V1.35.1.0
  
 <h2>Project:</h2>
 D:\WorkSpace\1.FirmwareProject\10.Lora\2.Firmware\Lora.Firmware\Lora.Firmware.uvprojx
-Project File Date:  05/03/2024
+Project File Date:  05/06/2024
 
 <h2>Output:</h2>
 *** Using Compiler 'V5.06 update 6 (build 750)', folder: 'C:\Keil_v5\ARM\ARMCC\Bin'
 Build target 'Lora'
+compiling Interrupt.c...
+src\Interrupt.c(67): warning:  #550-D: variable "Data"  was set but never used
+  	uint16_t Data;
+src\Interrupt.c(102): warning:  #550-D: variable "Data"  was set but never used
+  	uint16_t Data;
+src\Interrupt.c: 2 warnings, 0 errors
+compiling InitSystem.c...
 compiling PowerCtrl.c...
+compiling Configuration.c...
+compiling main.c...
 linking...
-Program Size: Code=21484 RO-data=812 RW-data=80 ZI-data=3712  
+Program Size: Code=24880 RO-data=812 RW-data=72 ZI-data=3680  
 FromELF: creating hex file...
-".\Objects\Lora.Firmware" - 0 Error(s), 0 Warning(s).
+".\Objects\Lora.Firmware" - 0 Error(s), 2 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -54,7 +63,7 @@ Package Vendor: Keil
 <h2>Collection of Component Files used:</h2>
 
    * Component: ARM::CMSIS:CORE:5.6.0
-Build Time Elapsed:  00:00:02
+Build Time Elapsed:  00:00:06
 </pre>
 </body>
 </html>

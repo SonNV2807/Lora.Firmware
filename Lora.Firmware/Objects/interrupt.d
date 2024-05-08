@@ -30,5 +30,7 @@
 .\objects\interrupt.o: .\Libraries\inc\stm32l1xx_usart.h
 .\objects\interrupt.o: .\Libraries\inc\stm32l1xx_wwdg.h
 .\objects\interrupt.o: .\Libraries\inc\misc.h
+.\objects\interrupt.o: .\inc\Debug.h
+.\objects\interrupt.o: .\inc\Watchdog.h
 .\objects\interrupt.o: .\inc\GPS\GPS_Hardware.h
 .\objects\interrupt.o: .\inc\Configuration.h

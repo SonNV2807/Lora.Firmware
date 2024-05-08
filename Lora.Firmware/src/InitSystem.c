@@ -8,6 +8,7 @@
 */
 
 /* Includes */
+#include "RTC.h"
 #include "Led.h"
 #include "Debug.h"
 #include "Watchdog.h"
@@ -34,12 +35,12 @@ void System_Initialize(void)
 	
 	SysTickConfig();
 	
-	WatchDog_Initialize();
+//	WatchDog_Initialize();
+//	RTC_Initialize();
 //	Led_Initialize();
 	Debug_Initialize(115200);
 	DebugPrint("\rKhoi tao he thong...");
 	Hardware_Initialize();
-//	EXTI_Configuration();
 //	GPS_Initialize(9600);
 	
 	DebugPrint("\rKhoi tao xong.");

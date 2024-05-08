@@ -34,3 +34,4 @@
 .\objects\configuration.o: .\inc\PowerCtrl.h
 .\objects\configuration.o: .\inc\GPS\GPS_Hardware.h
 .\objects\configuration.o: .\inc\Configuration.h
+.\objects\configuration.o: .\inc\HardwareManager.h

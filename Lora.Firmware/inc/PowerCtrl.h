@@ -32,10 +32,11 @@ typedef enum
 /* Khai bao cac ham dung trong module */
 void PWR_Process(void);
 void PWR_LowPowerRunMode(FunctionalState NewState);
-void PWR_SleepMode(uint8_t SleepMode, uint8_t EntryMode);
-void PWR_LowPowerSleepMode(void);
+void PWR_SleepMode(uint8_t EntryMode);
+void PWR_LowPowerSleepMode(uint8_t EntryMode);
 void PWR_StopMode(uint8_t EntryMode);
-void EXTI_Configuration(void);
+void PWR_StandbyMode(void);
+void PWR_ProcessCommand(char* Cmd);
 
 #endif
 

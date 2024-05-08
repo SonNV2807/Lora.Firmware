@@ -105,10 +105,12 @@ static void Hardware_CheckClockSource(void)
 	CLKSource = RCC_GetSYSCLKSource();
 	
 	if(CLKSource == 0x00)
-		DebugPrint("\rCLOCK: Nguon clock tu thach anh noi.");
+		DebugPrint("\rCLOCK: Nguon clock MSI.");
 	else if(CLKSource == 0x04)
-		DebugPrint("\rCLOCK: Nguon clock tu thach anh ngoai.");
+		DebugPrint("\rCLOCK: Nguon clock HSI.");
+	else if(CLKSource == 0x08)
+		DebugPrint("\rCLOCK: Nguon clock HSE.");
 	else
-		DebugPrint("\rCLOCK: Nguon clock tu PLL.");
+		DebugPrint("\rCLOCK: Nguon clock PLL.");
 }
 

@@ -10,6 +10,8 @@
 /* Includes */
 #include "Led.h"
 #include "main.h"
+#include "Debug.h"
+#include "Watchdog.h"
 #include "GPS_Hardware.h"
 #include "Configuration.h"
 
@@ -107,19 +109,25 @@ void UART4_IRQHandler(void)
 }
 
 /*******************************************************************************
- * Function Name  	: EXTI0_IRQHandler
+ * Function Name  	: RTC_WKUP_IRQHandler
  * Return         	: None
  * Parameters 			: None
- * Description			: This function handles EXTI0 global interrupt request.
+ * Description			: This function handles RTC WakeUp global interrupt request.
 *******************************************************************************/
-void EXTI0_IRQHandler(void)
+void RTC_WKUP_IRQHandler(void)
 {
-	if(EXTI_GetITStatus(EXTI_Line0) != RESET)
-	{
-		EXTI_ClearITPendingBit(EXTI_Line0);
-		Led_Ctrl(2, LED_ON);
-	}
-	else
-		Led_Ctrl(2, LED_OFF);
+   PWR->CR |= PWR_CR_DBP;      
+
+   //
+
+   RTC->ISR &= ~RTC_ISR_WUTF;   
+
+   //
+
+	PWR->CR &= ~PWR_CR_DBP;
+
+   //
+
+   EXTI_ClearITPendingBit(EXTI_Line20);
 }
 

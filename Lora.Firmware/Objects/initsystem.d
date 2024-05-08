@@ -1,5 +1,5 @@
 .\objects\initsystem.o: src\InitSystem.c
-.\objects\initsystem.o: .\inc\Led.h
+.\objects\initsystem.o: .\inc\RTC.h
 .\objects\initsystem.o: .\inc\main.h
 .\objects\initsystem.o: .\Libraries\CMSIS\Device\ST\STM32L1xx\Include\stm32l1xx.h
 .\objects\initsystem.o: .\Libraries\CMSIS\Include\core_cm3.h
@@ -30,6 +30,8 @@
 .\objects\initsystem.o: .\Libraries\inc\stm32l1xx_usart.h
 .\objects\initsystem.o: .\Libraries\inc\stm32l1xx_wwdg.h
 .\objects\initsystem.o: .\Libraries\inc\misc.h
+.\objects\initsystem.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\time.h
+.\objects\initsystem.o: .\inc\Led.h
 .\objects\initsystem.o: .\inc\Debug.h
 .\objects\initsystem.o: .\inc\Watchdog.h
 .\objects\initsystem.o: .\inc\PowerCtrl.h

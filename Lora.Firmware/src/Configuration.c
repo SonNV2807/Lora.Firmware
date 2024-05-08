@@ -13,6 +13,7 @@
 #include "PowerCtrl.h"
 #include "GPS_Hardware.h"
 #include "Configuration.h"
+#include "HardwareManager.h"
 
 /* Khai bao cac bien dung trong module */
 ConfigStructure						Config;
@@ -47,14 +48,15 @@ void Config_Process(void)
 	DebugPrint("\rNhan duoc du lieu tu cong Debug. Chieu dai %d. Noi dung: %s", Config.RxCounter, Config.RxBuffer);
 	
 	/* Debug GPS */
+	if(strstr((char*) Config.RxBuffer, "RESET#"))
+		Hardware_SystemReset(1);
+	
+	/* Debug GPS */
 	if(strstr((char*) Config.RxBuffer, "DEBUG,1"))
 		GPS_ToggleDebug();
 	
-	if(strstr((char*) Config.RxBuffer, "LPR,1"))
-		PWR_LowPowerRunMode(ENABLE);
-	
-	if(strstr((char*) Config.RxBuffer, "LPR,0"))
-		PWR_LowPowerRunMode(DISABLE);
+	if(strstr((char*) Config.RxBuffer, "LP,"))
+		PWR_ProcessCommand(strstr((char*) Config.RxBuffer, "LP,"));
 	
 	/* Xoa bo dem nhan */
 	Config.RxCounter = 0;

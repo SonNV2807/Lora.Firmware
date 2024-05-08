@@ -8,9 +8,12 @@
 */
 
 /* Includes */
+#include "RTC.h"
+#include "time.h"
 #include "Debug.h"
 #include "Watchdog.h"
 #include "PowerCtrl.h"
+#include "Utilities.h"
 #include "InitSystem.h"
 
 /*******************************************************************************
@@ -32,7 +35,7 @@ void PWR_Process(void)
 	
 //	PWR_LowPowerRunMode(ENABLE);
 	
-	PWR_SleepMode(PWR_Regulator_ON, PWR_SLEEPEntry_WFI);
+//	PWR_SleepMode(PWR_Regulator_ON, PWR_SLEEPEntry_WFI);
 	
 //	PWR_LowPowerSleepMode();
 	
@@ -51,12 +54,18 @@ void PWR_LowPowerRunMode(FunctionalState NewState)
 {
 	RCC->APB1ENR |= RCC_APB1ENR_PWREN;
 	
-	RCC_MSIRangeConfig(RCC_MSIRange_0);
+	if(NewState == ENABLE)
+		RCC_MSIRangeConfig(RCC_MSIRange_0);
+	else
+		RCC_MSIRangeConfig(RCC_MSIRange_5);
 	
 	SysTickConfig();
 	Debug_Initialize(115200);
 	
-	DebugPrint("\rEnter Low-power Run mode.");
+	if(NewState == ENABLE)
+		DebugPrint("\rEnter Low-power Run mode.");
+	else
+		DebugPrint("\rExit Low-power Run mode.");
 	
 	PWR_EnterLowPowerRunMode(NewState);
 }
@@ -67,29 +76,16 @@ void PWR_LowPowerRunMode(FunctionalState NewState)
  * Parameters 			: None
  * Description			: Che do sleep cua MCU
 *******************************************************************************/
-void PWR_SleepMode(uint8_t SleepMode, uint8_t EntryMode)
-{
-//	/* Configure low-power mode */
-//  SCB->SCR &= ~( SCB_SCR_SLEEPDEEP_Msk );  	// clear bit SLEEPDEEP
-//  SCB->SCR |= SCB_SCR_SLEEPONEXIT_Msk;     	// set bit SLEEPONEXIT
-//     
-//  /* Ensure Flash memory stays on */
-//  FLASH->ACR &= ~FLASH_ACR_SLEEP_PD;
-//  __WFE();  																	// enter low-power mode
-	
-//	SCB->SCR &= ~( SCB_SCR_SLEEPDEEP_Msk );  			// clear SLEEPDEEP bit
-//	
-//	if(SleepMode == SLEEP_ON_EXIT)
-//		SCB->SCR |= SCB_SCR_SLEEPONEXIT_Msk;     		// set SLEEPONEXIT bit
-//	else	
-//		SCB->SCR &= ~(SCB_SCR_SLEEPONEXIT_Msk);     // clear SLEEPONEXIT bit
-//	
-//	if(EntryMode == WAIT_FOR_INTERRUPT)
-//		__WFI();
-//	else
-//		__WFE();
+void PWR_SleepMode(uint8_t EntryMode)
+{	
+	struct tm time;
 	
 	DebugPrint("\rEnter Sleep mode.");
+	
+	rtc_get_time(&time);
+	time.tm_sec  += 3;
+  rtc_set_alarm(&time, NULL, NULL);
+	
 	PWR_EnterSleepMode(PWR_Regulator_ON, PWR_SLEEPEntry_WFI);
 }	
 
@@ -99,7 +95,7 @@ void PWR_SleepMode(uint8_t SleepMode, uint8_t EntryMode)
  * Parameters 			: None
  * Description			: Che do Low-power Sleep cua MCU
 *******************************************************************************/
-void PWR_LowPowerSleepMode(void)
+void PWR_LowPowerSleepMode(uint8_t EntryMode)
 {
 	FLASH_SLEEPPowerDownCmd(ENABLE);
 	
@@ -119,30 +115,52 @@ void PWR_LowPowerSleepMode(void)
  * Description			: Che do stop cua MCU
 *******************************************************************************/
 void PWR_StopMode(uint8_t EntryMode)
-{	  
-//  /* Check the parameters */
-//  assert_param(IS_PWR_REGULATOR(PWR_Regulator));
-//  assert_param(IS_PWR_STOP_ENTRY(PWR_STOPEntry));
-//  
-//  /* Clear PDDS and LPDSR bits */
-//  PWR->CR &= ~(PWR_CR_PDDS);
-//  
-//  /* Set LPDSR bit according to PWR_Regulator value */
-//  PWR->CR &= ~(PWR_CR_LPSDSR);
-//  
-//  /* Set SLEEPDEEP bit of Cortex System Control Register */
-//  SCB->SCR |= SCB_SCR_SLEEPDEEP;
-//  
-//  /* Select STOP mode entry --------------------------------------------------*/
-//	if(EntryMode == WAIT_FOR_INTERRUPT)
-//		__WFI();
-//	else
-//		__WFE();
-//	
-//  /* Reset SLEEPDEEP bit of Cortex System Control Register */
-//  SCB->SCR &= (uint32_t)~((uint32_t)SCB_SCR_SLEEPDEEP);  
-
+{	    
 	DebugPrint("\rEnter Stop mode.");
+	
+//	DBGMCU_Config(DBGMCU_IWDG_STOP, DISABLE);
+
+//	/* Disable PVD */
+//	PWR_PVDCmd(DISABLE);   
+//	/* Enable Ultra low power mode */   
+//	PWR_UltraLowPowerCmd(ENABLE);   
+//	RCC->AHBENR = 0x05;   
+//	RCC->AHBLPENR = 0x05;   
+//	RCC->APB1ENR = RCC_APB1ENR_PWREN;   
+//	RCC->APB2ENR = 0;   
+//	/* To stop the sys tick for avoid IT */   
+//	SysTick->CTRL = 0;   
+//	SysTick->CTRL  &= ~SysTick_CTRL_TICKINT_Msk;  
+//	// systick IRQ off   
+//	PWR_ClearFlag(PWR_FLAG_WU);   
+//	/* RCC system reset */   
+//	RCC_DeInit();   
+//	/* Flash no latency*/   
+//	FLASH_SetLatency(FLASH_Latency_0);   
+//	/* Disable Prefetch Buffer */   
+//	FLASH_PrefetchBufferCmd(DISABLE);   
+//	/* Disable 64-bit access */   
+//	FLASH_ReadAccess64Cmd(DISABLE);   
+//	/* Disable FLASH during SLeep  */   
+//	FLASH_SLEEPPowerDownCmd(ENABLE);   
+//	/* Enable the PWR APB1 Clock */   
+//	RCC_APB1PeriphClockCmd(RCC_APB1Periph_PWR, ENABLE);   
+//	/* Select the Voltage Range 3 (1.2V) */   
+//	PWR_VoltageScalingConfig(PWR_VoltageScaling_Range3);   
+//	/* Wait Until the Voltage Regulator is ready */   
+//	while (PWR_GetFlagStatus(PWR_FLAG_VOS) != RESET) {};   
+//	/* Configure the MSI frequency */   
+//	RCC_MSIRangeConfig(RCC_ICSCR_MSIRANGE_0);   
+//	/* Select MSI as system clock source */   
+//	RCC_SYSCLKConfig(RCC_SYSCLKSource_MSI);   
+//	/* Wait until MSI is used as system clock source */   
+//	while (RCC_GetSYSCLKSource() != 0x00) {};   
+//	/* Disable HSI clock */   
+//	RCC_HSICmd(DISABLE);   
+//	/* Disable HSE clock */   
+//	RCC_HSEConfig(RCC_HSE_OFF);   
+//	/* Disable LSI clock */   
+//	RCC_LSICmd(DISABLE); 	
 	
 	PWR_EnterSTOPMode(PWR_Regulator_LowPower, EntryMode);
 }
@@ -157,51 +175,53 @@ void PWR_StandbyMode(void)
 {
 	DebugPrint("\rEnter Standby mode.");
 	
+	PWR_WakeUpPinCmd(PWR_WakeUpPin_1, ENABLE);
+	
 	PWR_EnterSTANDBYMode();
 }
 
 /*******************************************************************************
- * Function Name  	: EXTI_Configuration
+ * Function Name  	: PWR_ProcessCommand
  * Return         	: None
  * Parameters 			: None
- * Description			: Cau hinh ngat EXTI
+ * Description			: Xu ly lenh dieu khien PWR
 *******************************************************************************/
-void EXTI_Configuration(void)
+void PWR_ProcessCommand(char* Cmd)
 {
-	/* Khai bao bien cau truc */
-	GPIO_InitTypeDef		GPIO_InitStructure;
-	EXTI_InitTypeDef		EXTI_InitStructure;
-	NVIC_InitTypeDef		NVIC_InitStructure;
+	uint8_t Id, Index;
 	
-	/* Cap clock cho ngoai vi */
-	RCC_APB2PeriphClockCmd(RCC_APB2Periph_SYSCFG, ENABLE);
-	RCC_AHBPeriphClockCmd(RCC_AHBPeriph_GPIOA, ENABLE);
+	Index = FindIndexOfCharacter(',', Cmd);
+	Index++;
+	Id = GetNumberFromString(Index, Cmd);
 	
-	/* Configure PA0 pin as input floating */	
-	GPIO_InitStructure.GPIO_Pin 	= GPIO_Pin_0;
-	GPIO_InitStructure.GPIO_Mode 	= GPIO_Mode_IN;
-	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_2MHz;		
-	GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;
-	GPIO_InitStructure.GPIO_PuPd 	= GPIO_PuPd_NOPULL;											
-	GPIO_Init(GPIOA, &GPIO_InitStructure);
-	
-	/* Connect EXTI Line0 to PA0 pin */
-  SYSCFG_EXTILineConfig(EXTI_PortSourceGPIOA, EXTI_PinSource0);
-	
-	/* Configure EXTI Line0 */
-  EXTI_InitStructure.EXTI_Line 		= EXTI_Line0;
-  EXTI_InitStructure.EXTI_Mode 		= EXTI_Mode_Interrupt;
-  EXTI_InitStructure.EXTI_Trigger = EXTI_Trigger_Falling;
-  EXTI_InitStructure.EXTI_LineCmd = ENABLE;
-  EXTI_Init(&EXTI_InitStructure);
-
-	/* Enable and set EXTI Line0 Interrupt to the lowest priority */
-  NVIC_InitStructure.NVIC_IRQChannel 										= EXTI0_IRQn;
-  NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority 	= 0;
-  NVIC_InitStructure.NVIC_IRQChannelSubPriority 				= 0;
-  NVIC_InitStructure.NVIC_IRQChannelCmd 								= ENABLE;
-  NVIC_Init(&NVIC_InitStructure);
-	
-	EXTI_GenerateSWInterrupt(EXTI_Line0);
+	switch(Id)
+	{
+		case 0: 
+			PWR_LowPowerRunMode(DISABLE);
+		break;
+		
+		case 1: 
+			PWR_LowPowerRunMode(ENABLE);
+		break;
+		
+		case 2:
+			PWR_SleepMode(PWR_SLEEPEntry_WFI);
+		break;
+		
+		case 3: 
+			PWR_LowPowerSleepMode(PWR_SLEEPEntry_WFI);
+		break;
+		
+		case 4: 
+			PWR_StopMode(PWR_SLEEPEntry_WFI);
+		break;
+		
+		case 5:
+			PWR_StandbyMode();
+		break;
+		
+		default:
+		break;
+	}
 }
 

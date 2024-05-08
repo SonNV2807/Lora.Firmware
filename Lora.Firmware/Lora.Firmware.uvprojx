@@ -382,6 +382,11 @@
           <GroupName>App</GroupName>
           <Files>
             <File>
+              <FileName>RTC.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\src\RTC.c</FilePath>
+            </File>
+            <File>
               <FileName>Led.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\src\Led.c</FilePath>
@@ -477,16 +482,6 @@
               <FilePath>.\Libraries\src\stm32l1xx_rcc.c</FilePath>
             </File>
             <File>
-              <FileName>system_stm32l1xx.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\Libraries\CMSIS\Device\ST\STM32L1xx\Source\Templates\system_stm32l1xx.c</FilePath>
-            </File>
-            <File>
-              <FileName>startup_stm32l1xx_md.s</FileName>
-              <FileType>2</FileType>
-              <FilePath>.\Libraries\CMSIS\Device\ST\STM32L1xx\Source\Templates\iar\startup_stm32l1xx_md.s</FilePath>
-            </File>
-            <File>
               <FileName>stm32l1xx_iwdg.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\Libraries\src\stm32l1xx_iwdg.c</FilePath>
@@ -507,9 +502,29 @@
               <FilePath>.\Libraries\src\stm32l1xx_syscfg.c</FilePath>
             </File>
             <File>
+              <FileName>stm32l1xx_rtc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Libraries\src\stm32l1xx_rtc.c</FilePath>
+            </File>
+            <File>
               <FileName>stm32l1xx_flash.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\Libraries\src\stm32l1xx_flash.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32l1xx_dbgmcu.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Libraries\src\stm32l1xx_dbgmcu.c</FilePath>
+            </File>
+            <File>
+              <FileName>system_stm32l1xx.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Libraries\CMSIS\Device\ST\STM32L1xx\Source\Templates\system_stm32l1xx.c</FilePath>
+            </File>
+            <File>
+              <FileName>startup_stm32l1xx_md.s</FileName>
+              <FileType>2</FileType>
+              <FilePath>.\Libraries\CMSIS\Device\ST\STM32L1xx\Source\Templates\iar\startup_stm32l1xx_md.s</FilePath>
             </File>
           </Files>
         </Group>
